@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Riemann's Nightmare</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+
+  <!-- ============ MENÚ ============ -->
+  <section id="pantallaMenu" class="pantalla menu">
+    <div class="menu-caja">
+      <div class="menu-sub">▦ rellena la figura</div>
+      <h1 class="menu-titulo">The Riemann's<br>Nightmare</h1>
+      <p class="menu-lema">10 niveles. 15 segundos cada uno. Rellena las figuras… si puedes.</p>
+      <div class="menu-botones">
+        <button class="btn primario grande" id="btnJugar">▶ Jugar</button>
+        <button class="btn grande" id="btnPuntuaciones">🏆 Puntuaciones</button>
+      </div>
+      <a class="link menu-editor" href="editor.html">🛠️ Editor de niveles</a>
+    </div>
+  </section>
+
+  <!-- ============ JUEGO ============ -->
+  <section id="pantallaJuego" class="pantalla oculto">
+    <header class="barra">
+      <div class="logo">▦ Riemann's Nightmare</div>
+      <div class="nivel-cont">Nivel <b id="numNivel">1</b> / <b id="numTotal">10</b></div>
+      <div class="crece"></div>
+      <div class="reloj" id="reloj">15.0s</div>
+      <button class="navbtn" id="btnSalir">✕ Salir</button>
+    </header>
+
+    <div class="tiempo-barra"><i id="tiempoBarra"></i></div>
+
+    <main class="contenido">
+      <section class="lienzo-caja">
+        <canvas id="lienzo" width="600" height="450"></canvas>
+      </section>
+
+      <aside class="panel">
+        <div class="titulo-nivel" id="tituloNivel">—</div>
+        <p class="hint" id="hint"></p>
+
+        <h3 style="margin-top:14px">Puntaje del nivel</h3>
+        <div class="metricas">
+          <div class="metrica"><span>Relleno</span><b class="v-ok" id="mRelleno">0%</b></div>
+          <div class="metrica"><span>Desborde</span><b class="v-bad" id="mDesborde">0%</b></div>
+          <div class="metrica"><span>Puntaje neto</span><b class="v-acc" id="mNeto">0%</b></div>
+        </div>
+        <div class="barra-prog"><i id="barraNeto"></i></div>
+        <div class="medalla">Récord: <b id="mRecord">0%</b> &nbsp;·&nbsp; Piezas: <b id="mPiezas">0</b></div>
+
+        <h3 style="margin-top:16px">Acciones</h3>
+        <div class="fila" style="margin-bottom:10px">
+          <button class="btn" id="btnDeshacer">↶ Deshacer</button>
+          <button class="btn peligro" id="btnLimpiar">🗑 Limpiar</button>
+        </div>
+        <button class="btn primario" id="btnSiguiente" style="width:100%">Confirmar y seguir ▶</button>
+
+        <label class="fila-chk">
+          <input type="checkbox" id="chkFigura" checked /> Mostrar figura guía
+        </label>
+        <p class="aviso">
+          🖱️ Arrastra para dibujar rectángulos. Verde = bien · Rojo = te pasaste.<br>
+          El nivel avanza solo al acabarse el tiempo. <b>Ctrl+Z</b> deshacer.
+        </p>
+      </aside>
+    </main>
+  </section>
+
+  <!-- ============ RESULTADOS ============ -->
+  <section id="pantallaResultado" class="pantalla oculto centro">
+    <div class="resultado-caja">
+      <h1 class="res-titulo">¡Completado! 🎉</h1>
+      <p class="menu-lema" id="resSub">Estos son tus puntajes:</p>
+      <div class="tabla" id="tablaResultado"></div>
+      <div class="total-caja">
+        <span>Puntaje total</span>
+        <b id="resTotal">0</b>
+      </div>
+      <p class="record-msg" id="resRecord"></p>
+      <div class="menu-botones">
+        <button class="btn primario grande" id="btnReintentar">↻ Volver a jugar</button>
+        <button class="btn grande" id="btnMenu">⌂ Menú</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PUNTUACIONES ============ -->
+  <section id="pantallaPuntuaciones" class="pantalla oculto centro">
+    <div class="resultado-caja">
+      <h1 class="res-titulo">🏆 Puntuaciones</h1>
+      <div class="total-caja">
+        <span>Mejor puntaje total</span>
+        <b id="mejorTotal">0</b>
+      </div>
+      <p class="menu-lema" style="margin-top:18px">Récord por nivel:</p>
+      <div class="tabla" id="tablaRecords"></div>
+      <div class="menu-botones">
+        <button class="btn grande" id="btnVolverMenu">⌂ Volver al menú</button>
+        <button class="btn peligro grande" id="btnBorrarRecords">Borrar récords</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/figuras.js"></script>
+  <script src="js/niveles.js"></script>
+  <script src="js/juego.js"></script>
+</body>
+</html>

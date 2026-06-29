@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editor de niveles · Rellena la Figura</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+  <header class="barra">
+    <div class="logo">🛠️ Editor de niveles</div>
+    <div class="crece"></div>
+    <a class="link" href="index.html">🎮 Ir al juego</a>
+  </header>
+
+  <main class="editor-grid">
+
+    <!-- Columna izquierda: herramientas -->
+    <aside class="panel herramientas">
+      <h3>Añadir figura</h3>
+      <button class="btn" id="btnRect">▭ Rectángulo</button>
+      <button class="btn" id="btnCirc">● Círculo</button>
+      <button class="btn" id="btnElip">⬭ Elipse</button>
+      <button class="btn" id="btnTri">▲ Triángulo</button>
+      <button class="btn" id="btnPoli">✐ Polígono</button>
+
+      <div class="campo" style="margin-top:12px">
+        <label>Color para nuevas figuras</label>
+        <input type="color" id="colorBase" value="#7c5cff" />
+      </div>
+
+      <div class="htitulo">Orden / borrar</div>
+      <button class="btn" id="btnSubir">⬆ Traer al frente</button>
+      <button class="btn" id="btnBajar">⬇ Enviar atrás</button>
+      <button class="btn peligro" id="btnBorrar">🗑 Borrar figura</button>
+
+      <div class="htitulo">Nivel</div>
+      <button class="btn" id="btnNuevo">✦ Nuevo nivel vacío</button>
+    </aside>
+
+    <!-- Centro: lienzo -->
+    <section class="lienzo-caja">
+      <canvas id="lienzo" width="600" height="450"></canvas>
+      <p class="aviso">
+        Clic en una figura para seleccionarla · arrastra para moverla · usa las
+        <b style="color:var(--acc-2)">asas</b> para escalar · <b>Supr</b> para borrar.
+        En modo polígono: clic = punto, doble clic = cerrar.
+      </p>
+    </section>
+
+    <!-- Derecha: propiedades + export -->
+    <aside class="panel">
+      <h3>Datos del nivel</h3>
+      <div class="campo"><label>Nombre</label><input type="text" id="mName" /></div>
+      <div class="campo"><label>Pista (hint)</label><input type="text" id="mHint" placeholder="Texto de ayuda" /></div>
+      <div class="fila">
+        <div class="campo" style="flex:1"><label>Ancho</label><input type="number" id="mW" value="600" /></div>
+        <div class="campo" style="flex:1"><label>Alto</label><input type="number" id="mH" value="450" /></div>
+      </div>
+      <div class="campo">
+        <label>Penalización de desborde (1 = normal, &gt;1 castiga más)</label>
+        <input type="number" id="mPenal" value="1" step="0.1" min="0" />
+      </div>
+
+      <h3 style="margin-top:14px">Figuras del nivel</h3>
+      <div class="lista-figuras" id="listaFiguras"></div>
+
+      <h3 style="margin-top:14px">Propiedades</h3>
+      <div id="props"></div>
+
+      <h3 style="margin-top:14px">Guardar / exportar</h3>
+      <div class="fila" style="margin-bottom:8px">
+        <button class="btn primario" id="btnGuardarJugar">💾 Guardar y jugar</button>
+      </div>
+      <div class="fila" style="margin-bottom:8px">
+        <button class="btn" id="btnExportar">{ } Generar JSON</button>
+        <button class="btn" id="btnCopiar">⧉ Copiar</button>
+      </div>
+      <div class="fila" style="margin-bottom:8px">
+        <button class="btn" id="btnDescargar">⬇ Descargar .json</button>
+        <button class="btn" id="btnImportar">⬆ Importar JSON</button>
+      </div>
+      <textarea id="salidaJson" placeholder="Aquí aparece el JSON del nivel. Pega aquí y pulsa Importar para cargar uno."></textarea>
+      <button class="btn peligro" id="btnLimpiarGuardados" style="margin-top:8px">Borrar niveles guardados</button>
+
+      <p class="aviso">
+        “Guardar y jugar” deja el nivel en este navegador (localStorage) y aparece en el
+        juego marcado con ★. Para incluirlo de forma permanente en el código, copia el
+        JSON y agrégalo al arreglo de <b>js/niveles.js</b>.
+      </p>
+    </aside>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/figuras.js"></script>
+  <script src="js/editor.js"></script>
+</body>
+</html>
